@@ -44,9 +44,64 @@
 - <b> ports and adpaters </b>
 - portas (classes do domínio); adaptadores (classes que fazem a ponte entre mundos diferentes) (p.21)
 
+## Capítulo 3 - Acoplamento e o tal do DIP
+"Tenha classes que são muito coesas e pouco acopladas"
 
-## Capítulo 3 - 
-## Capítulo 4 - 
+### Acoplamento
+- Acoplamento = dependência
+- Problemática: o grande problema do acoplamento é que uma mudança em qualquer uma das classes pode impactar em mudanças na classe principal (p.25) 
+- Muitas dependências = todas essas dependêcias podem propagar problemas para a classe principal, tornando ela <b>mais frágil e fácil de quebrar</b>
+- Acoplamento são necessários, mas é preciso fugir de acoplamentos perigosos
+
+
+### 3.2 Estabilidade de Classes
+- <b>""acoplamento bom": a dependência é estável"</b> (p.26)
+- Ou seja, é melhor que a classe dependa de outras que são mais estáveis, assim <b> a chance dessa dependência propagar um erro, uma mudança, é menor </b>
+
+### 3.3 Buscando poro classes estáveis
+- <b>Interfaces são um bom caminho para criar módulos estáveis</b>
+- os contratos promovidos pelas interfaces faz com que o desenvolvedor pense 2x antes de mudar
+- interfaces tendem a ser mais coesas, se o contrato mantiver-se simples e bem definido -> coisas coesas tendem a mudar pouco
+- "programe voltado para interfaces" (p.28) - mas cada cenpario precisa ser analisado individualmente
+- interfaces promovem <b>flexibilidade</b>, pois permite que existam diversas implementações
+- Ou seja, o ideal é <b>ACOPLAR-SE A MÓDULOS ESTÁVEIS</b>, que tendem a mudar menos
+
+#### Interfaces coesas:
+- contrato simples e bem definidos, mais reutilizavéis
+- interfaces coesas são aquelas que suas implementações não precisem fazer "gambiarras" para se adaptarem
+
+### 3.4 DIP Dependency Inversion Principle
+> "Se precisamos acoplar, que seja com classes estáveis" (p.31)
+- Princípio da Inversão de Dependência: <b>"Sempre qie uma classe for depender de outra, ela deve depender sempre de outro módulo mais estável do que ela mesma"</b>
+- Abstrações tendem a ser mais estáveis e implementações instáveis. Tentar não depender de implementações
+- Abstrações não devem depender de implementações
+
+>De maneira mais elegante, o princípio diz: 
+>- Módulos de alto nível não devem depender de módulos de baixo nível.
+Ambos devem depender de abstrações.
+> - Abstrações não devem depender de detalhes. Detalhes devem depender de abstrações.
+
+- Clases com menos dependências são mais dimples, com menos regras de negócio e mais fácil de serem testadas
+- "Agrupar dependências é, no fim, aumentar a coesão" (p.36) -> dependencias que façam sentido serem agrupadas, por contexto
+- Cuidado com acoplamentos lógicos, ou seja, aqueles que não são explicitos, mas as mudanças serão propagadas
+
+> - Conclusão: Classes não coesas devem ter suas responsabilidades dividas em pequenas classes, e classes devem tentar ao máximo se acoplar com classes que são estáveis, ou seja, mudam pouco.
+
+## Capítulo 4 - Classes abertas e o tal do OCP
+- Nosso código deve estar sempre pronto para evoluir 
+- Como balencear enrte acoplamento e coesão? Buscar o equilíbrio é fundamental
+
+### 4.2 OCP Princípio do Aberto-Fechado
+- Fazer com que a criação de novas regras seja mais simples e que as mudanças se propaguem automaticamente por todo o sistema.
+- "Um outro conceito que nos ajuda a ter classes coesas e que evoluam mais
+fácil é pensar sempre em escrever classes que são “abertas para extensão”, mas “fechadas para modificação” (sim, esse é o famoso Open Closed Principle)" (p.43)
+>- <b>Abertas para extensão:</b> estender o compartamento deve ser fácil
+>- <b>Fechadas para alteração:</b> a classe nçao deve ser modificada o tempo todo
+- Abstrações são uma boa ferramenta para isso e passar a receber pelo construtor a implementação, dando mais flexibilidade sem precisar modificar o tempo todo a cada necessidade de uso, <b>mudando o comportamento final sem mudar o código.</b>
+- Uma classe que depende de abstrações é um bom exemplo do uso do OCP. Afinal, basta passar diferentes implementações para que ela execute de maneira distinta. Ao mesmo tempo estando fechada para modificações, já que não há razões ára mudar o código dessa classe. (p.46)
+- "Se está difícil de testar, é poque seu código pode ser melhorado" (p.49)
+- A falta de abstração gera repetição de código
+- <b> Classes abertas são aquelas que deicam explícitas suas dependências</b>
 
 ## Capítulo 5 - O encapsulamento e a propagação de mudanças
 Ideia principal: o uso do encapsulamento como forma de diminuir os pontos de atuação necessários para propagar mudanças
