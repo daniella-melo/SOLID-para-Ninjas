@@ -179,3 +179,71 @@ Deixe exposto o <b> O QUÊ </b> e esconda o <b>COMO</b>
 ### 6.9 Conclusão
 - Um bom uso de herança evita ao máximo que a classe filho conheça detalhes da implementação do pai, e não violam as restrições de pré e pós-condições na hora de sobreescrever determinado comportamento
 - Não descarte a herança, apenas favoreça a composição
+
+## Capítulo 7 - Interfaces magras e o tal do ISP
+ISP - Interface segregation principle — Princípio da Segregação de interface
+- criar interfaces coesas
+- <i>fat interface</i>: sobrecarga de função ou de métodos desnecessários, BAIXO REÚSO
+- uma má interface fará com que os clientes sintam necessidade de fazer gambiarras para se adaptar, quebrando também o princípio de Liskov
+
+### 7.1 Interfaces coesas e magras
+- Uma interface coesa é aquela que possui uma responsabilidade
+- se uma interface não é coesa, também pode ser interessante dividir em duas ou mais
+- cosão favorece o reúso, e interfaces coesas tendem a ser mais <b>estáveis</b>, impedem gambiarras
+
+### 7.2 Pensando na Interface mais magra possível
+- avaliar bem quais parâmetros deve-se receber em um método, avalie a discussão sobre acoplamento
+- quanto mais simples, menos problemas
+- método deve receber somente o que precisa, bem como ser semântico
+>- "Classes que dependem de interfaces leves sofrem menos com mudanças em outros pontos do sistema. Novamente, elas são pequenas, portanto, têm poucas razões para mudar."
+
+### 7.4 Fábricas ou Injeção de Dependência?
+- Temos duas opções: 
+  - usar algum framework de injeção de dependência, como Spring, Guice, entre outros 
+  - ou utilizar fábricas, isto é, classes cuja responsabilidade é instanciar outras classes.
+- Fábricas 
+  - independem de frameworks e de bibliotecas para funcionar
+  - ela é uma solução OO simples e de fácil implementação.
+  - "Em uma fábrica, você precisa manualmente instanciar C, que é uma dependência de B, que, por sua vez, é uma dependência de A" -> **dependência explícita**
+  - não deve conter regra de negócio
+  - altamente acoplada, mas **estáveis**. (só quebrará se a quando a maneira de construir a classe principal mudar)
+  - decisões de design
+- Frameworks 
+  - facilitam o trabalho de gerenciamento, requer menos código
+  - "por fazer tudo de forma automatizada e requerer menos código,“esconde” de você as suas reais dependências" -> **árvore de dependências implícita.**
+  
+## Capítulo 8 - Consistências, objetinhos e objetões
+- discutir a consistência do objeto. Como validar esse estado?
+- **Objetos Inválidos:**  "Objetos em estado inválido são  bastante problemáticos. Por estado inválido, entenda-se quele objeto cujos atributos possuem valores não aceitáveis" (p.100) 
+### 8.1 Construtores ricos
+- Objetos instáveis podem apresentar comportamento instável
+- "Garantir a integridade do seu estado é responsabilidade do próprio objeto." (p.101) -> não deve permitir que classes clientes o levem a um estado inválido
+- "Construtores são uma ótima maneira de se resolver esse problema. Se a classe possui atributos sem as quais ela não pode viver, eles devem ser pedidos no construtor" (p.101) -> ou seja, classe deve exigir antes de ser instanciada
+- se o objeto for complexo para ser construído somente com construtor, há alternativas (builders, factories, etc)
+
+### 8.2 Validando Dados
+- TIPOS DE VALIDAÇÃO:
+  - Validação de forma: garantem que o tipo de dado enviado pelo usuário seja válido
+  - Validação de negócio: regras de negócio
+- Controllers fazem essa ponte entre onde o usuário interage e o mundo do domínio, onde as regras vivem (p.104) -> é neles que acontecem as validações de forma, integridade dos dados
+- Onde devem ocorrer as validações de negócio? Depende
+  - Dentro da própria entidade
+    - construtores ou métodos internos. Não é muito elegante ter que tratar exceções lançadas por construtores
+  - Implementação de validação intermediária
+    - builders
+    - classes específicas
+    - decorator, chain of responsability
+- Ou seja: 
+>"Como você pode ver, existem diversas abordagens diferentes para validação. Todas elas possuem vantagens e desvantagens. Lembre-se de procurar por qual se encaixa melhor em seu   problema: se suas regras de validação são complexas, partir para uma solução mais flexível é necessário; se elas forem simples, talvez deixá-las puramente em seus controladores seja suficiente" (p.108)
+
+### 8.3 Teorema do Bom Vizinho e nulos pra lá e pra cá
+- "Bom vizinho no sentido de que você é educado e não passará dados inválidos para a outra classe." (p.109)
+>  "Tente ser amigável com a classe que você irá consumir. Faça bom uso da interface pública que ela provê. Use sempre a sobrecarga correta; muitas vezes a classe lhe dá a sobrecarg sem aquele parâmetro que você não tem em mãos naquele momento.
+> 
+>  Se você tem dados que realmente  podem ser nulos, pense em usar Null Objects, ou algo parecido (algumas linguagens já têm os tais Optional, que forçam o programador a tratar se ele é nulo ou não)" p109
+-  Tiny Types: um tipo particular que representa pequenas responsabilidaes, pequenas partes do sistemas e praticamente não têm comportamentos
+   - vantagens:  cada pequeno tipo pode também fazer sua própria validação, garantir que todo o conteúdo seja válido. Reutilizar fica mais fácil
+   - desvantagens: justamente a quantidade de código a mais que existirá no sistema.
+
+
+  
