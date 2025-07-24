@@ -262,3 +262,31 @@ ISP - Interface segregation principle — Princípio da Segregação de interfac
 ### 8.8 Nomenclatura de métodos e variáveis
 - Para nomear é preciso entender o significado de cada um deles, é preciso ficar semântico
 - Siga as convenções definidas pela sua equipe
+
+## Capítulo 9 - Maus cheiros de design
+- Conjunto de “más práticas” é conhecido por smells, code smells.
+---
+**Exemplos:**
+
+### 9.1 Refused Request
+- "Refused Bequest é o nome dado para quando herdamos de uma classe, mas não queremos fazer uso de alguns dos métodos herdados." p.120
+
+### 9.2 Feature Envy
+- "Feature Envy é o nome que damos para quando um método está mais interessado em outro objeto do que no objeto em que ele está inserido" p. 121
+
+### 9.3 Intimidade inapropriada
+- Quando outra classe conhece e/ou altera detalhes internos da sua classe que não deveria 
+- Geralmente percebido através de desrespeitos à ideia do Tell, Don't Ask
+- Idealmente, não devemos separar o dado de seu comportamento
+- Quebra de encapsulamento 
+
+### 9.4 God Class
+- "god class é aquela classe que controla muitos outros objetos do sistema." p.123
+- aumenta muito o acoplamento, ou seja, torna as classes muito dependentes e, consquentemente, **fŕageis**
+
+### 9.5 Divergent Changes
+- "Divergent changes é o nome do mau cheiro para quando a classe não é coesa, e sofre alterações constantes, devido às suas diversas responsabilidades." p.123
+- baixo reúso, muitas dependências, mais complexas e mais propenças a bugs
+
+### 9.6 Shotgun Surgery
+- Uma mudança qualquer requer que muitos pontos do código precisem mudar de uma vez só, ou seja, requer um esforço além do que se deveria; alterações em cascata
