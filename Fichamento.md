@@ -245,5 +245,20 @@ ISP - Interface segregation principle — Princípio da Segregação de interfac
    - vantagens:  cada pequeno tipo pode também fazer sua própria validação, garantir que todo o conteúdo seja válido. Reutilizar fica mais fácil
    - desvantagens: justamente a quantidade de código a mais que existirá no sistema.
 
+### 8.5 DTOs do bem 
+- DTO Data Transfer Objects -> devem ser usados para transferir dados, mas não devem possuir comportamentos, só atributos.
+- útil para quando é necessário transformações, ou seja, quando a classe de negócio não representa bem o escopo que se precisa exibir por exemplo
+- ex: relatórios; alimentar telas do front
+> - "Não tenha medo de criar DTOs que representem pedaços do seu sistema. Facilite a transferência de dados entre suas camadas; aumente a semântica deles. Lembre-se que o problema não é ter DTOs, mas sim só ter DTOs."
 
-  
+### 8.6 Imutabilidade x Mutabilidade
+- classes mutáveis: é possível mudar seu estado interno, mudando como se comportará dali em diante
+- classes imutáveis: após instanciadas, nunca mudam nada de seu estado interno
+
+### 8.7 Classes que são feias por natureza
+- Controladores e fábricas, por exemplo, tendem a ser feios (podendo ter faces procedurais, muitos ifs, códigos que pegam configuração), mas isso não é péssimo pois são códigos que tendem a ser mais **estáveis**, ou seja, ter poucos motivos para mudar. Mas, classes feias devem estar nas pontas da aplicação 
+> "Ou seja, não tenha medo de ter código feio, contanto que ele esteja bem controlado, escondido, e que você não precise lembrar que ele existe o tempo todo." (p.116)
+
+### 8.8 Nomenclatura de métodos e variáveis
+- Para nomear é preciso entender o significado de cada um deles, é preciso ficar semântico
+- Siga as convenções definidas pela sua equipe
