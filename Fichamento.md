@@ -290,3 +290,50 @@ ISP - Interface segregation principle — Princípio da Segregação de interfac
 
 ### 9.6 Shotgun Surgery
 - Uma mudança qualquer requer que muitos pontos do código precisem mudar de uma vez só, ou seja, requer um esforço além do que se deveria; alterações em cascata
+
+
+## Capítulo 10 Métricas de código
+Heuristicas para detectar possíveis problemas de design
+
+### 10.1 Complexidade Ciclomática
+- Muitas linhas ou **muitos caminhos a serem executados** (com muitos controladores de fluxos (ifs, fors, while)), mais complicado esse código pode ser, isso é a **complexidade Ciclomática**
+- A quantidade de caminhos possíveis de serem executados (quantidade de instruções de desvio) determinam o número dessa complexidade, também conhecido como **Número de McCabe**
+- Essa métrica pode ser calculada a **nível de método ou a nível de classe**, sendo esse último a soma da complexidade de cada método da classe
+- não há um número mágico ideal
+
+### 10.2 Tamanho de Métodos
+Cenários de alertas para possíveis problemas e aumento de complexidade:
+- Métodos muitos grandes 
+- Classe ter muitos atributos
+- Alto número de variáveis declaradas dentro de um método
+- A quantidade de parâmetros que um método recebe
+
+### 10.3 Coesão e a LCOM
+- "[...] coesão é algo totalmente dependente de contexto" p.130
+> "Sabemos que uma classe é um conjunto de atributos e comportamentos que manipulam esses atributos. Se a classe for coesa, esses comportamentos manipulam boa parte desses atributos, afinal todos eles dizem respeito à mesma responsabilidade. Se a classe não for coesa, ela provavelmente contém um conjunto de atributos que são manipulados apenas por alguns métodos, e outro conjunto de atributos que são manipulados apenas por outros métodos" (p.130) 
+- O trecho acima exibe o conceito de **LCOM (Lack of Cohesion of Methods)** -> ela conta o número desses diferentes conjuntos de
+responsabilidades dentro de uma classe, quanto maior esse número, menos coesa a classe é. (p.131). Ela pode ser muito sensível, por exemplo pelo fato de getters e settes influenciarem diretamente. Use-a como um filtro, um alerta
+
+### 10.4 Acoplamento Aferente e Eferente
+- **Acoplamento Aferente:** quantas classes dependem dessa classe, quanto mais dependências, mais estável essa classe precisa ser a fim de ser uma dependência confiável.
+- **Acoplamento Eferente:** de quantas classes essa classe depende, quanto mais dependências, mais frágil
+
+### 10.5 Má nomenclatura
+- É fundamental que o código seja fácil de ser compreendido. Dar bons nomes às variáveis, métodos e classes é importante. (p.134)
+
+## Capítulo 11 - MetricMiner
+- ferramenta de código aberto desenvolvido dentro da Universidade de São Paulo cujo objetivo é minerar informações que estão salvas dentro de um repositório de código fonte, como GIT e SVN
+
+## Capítulo 12 - COnclusão
+
+SOLID é um acrônimo em inglês que representa cinco princípios de design de software na programação orientada a objetos: 
+- **S**ingle Responsibility, 
+- **O**pen/Closed,
+- **L**iskov Substitution, 
+- **I**nterface Segregation e 
+- **D**ependency Inversion
+
+Em um projeto OO que use práticas de SOLID:
+- Classes com responsabilidades bem definidas -> ganhamos coesão
+- Classes com dependências bem pensadas e estáveos -> ganhamos flexibilidade
+- Esconder os detalhes de implementação -> ganhamos boa propgação de mudanças
